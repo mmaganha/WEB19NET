@@ -1,0 +1,71 @@
+﻿@model ProjetoWEB19NET.Dominio.ModelViews.ReceitaView
+
+@{
+    ViewData["Title"] = "Cadastro de Receita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-info">Cadastro de receitas</h2>
+<hr />
+<div class="row container center-block">
+    <div class="col-md-4">
+        <form asp-action="Adicionar" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredientes" class="control-label"></label>
+                <input asp-for="Ingredientes" class="form-control" />
+                <span asp-validation-for="Ingredientes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModoPreparo" class="control-label"></label>
+                <input asp-for="ModoPreparo" class="form-control" />
+                <span asp-validation-for="ModoPreparo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input type="file" asp-for="Foto" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <p class="control-label">Categorias</p>
+                    @*-@Html.DropDownList("Categorias", new SelectList(ViewBag.Categorias, "IdCategoria", "Descricao"), new { @class = "dropdown" })*@
+                    @Html.DropDownList("IdCategoria", (MultiSelectList)ViewBag.Categorias, new { idCategoria = "IdCategoria" })
+                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adicionar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @if (ViewBag.Erros != null)
+    {
+        @foreach (var item in ViewBag.Erros)
+        {
+            <p class="text-danger">item</p>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Index">Voltar para lista</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

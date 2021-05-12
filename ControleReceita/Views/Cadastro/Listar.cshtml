@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Dominio.ModelViews.ReceitaViewRetorno>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h2>Listar</h2>
+
+<p>
+    <a asp-action="Index">Cadastrar novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModoPreparo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tags)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCategoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredientes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModoPreparo)
+                </td>
+                <td>
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Foto)" width="80" height="80" />
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.Tags)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCategoria)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |                    
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

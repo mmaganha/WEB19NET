@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ProjetoWEB19NET.Dominio.ModelViews.CategoriaView>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Categorias</h2>
+
+<p>
+    <a asp-area="" asp-controller="Categoria" asp-action="Index">Adicionar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCategoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdCategoria }) |                    
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdCategoria })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
